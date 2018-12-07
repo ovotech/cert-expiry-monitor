@@ -26,6 +26,9 @@ spec:
     spec:
       containers:
       - name: cert-expiry-monitor
-        image: ***REMOVED***/cert-expiry-monitor:0.1
+        image: ***REMOVED***/${PROJECT}/cert-expiry-monitor:${VERSION}
+        env:
+        - name: MONITOR_HOSTS
+          value: "${MONITOR_HOSTS}"
         ports:
         - containerPort: 8000
