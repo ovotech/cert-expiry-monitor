@@ -17,14 +17,17 @@ def to_timestamp(dt):
 if __name__ == '__main__':
     CERT_EXPIRY = Gauge('cert_expiry_datetime', 'SSL certificate expiry date and time (unix seconds)', ['host'])
     HOSTS = ['***REMOVED***', '***REMOVED***', '***REMOVED***', '***REMOVED***']
+    port = 8000
 
     # Initialize gauge labels
     for host in HOSTS:
         CERT_EXPIRY.labels(host)
 
-    start_http_server(8000)
+    start_http_server(port)
+    print("Started Prometheus server on %s" % port)
 
     while True:
+        print("Updating expiry dates for %s..." % HOSTS)
         for host in HOSTS:
             CERT_EXPIRY.labels(host).set(to_timestamp(get_expiry(host)))
         time.sleep(60)
