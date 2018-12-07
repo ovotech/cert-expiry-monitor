@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cert-expiry-monitor
+  namespace: monitoring
+  labels:
+    app: cert-expiry-monitor
+spec:
+  replicas: 1
+  revisionHistoryLimit: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: cert-expiry-monitor
+  template:
+    metadata:
+      labels:
+        app: cert-expiry-monitor
+      annotations:
+        "prometheus.io/scrape": "true"
+        "prometheus.io/port": "8000"
+    spec:
+      containers:
+      - name: cert-expiry-monitor
+        image: ***REMOVED***/cert-expiry-monitor:0.1
+        ports:
+        - containerPort: 8000
