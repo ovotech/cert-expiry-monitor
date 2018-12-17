@@ -20,12 +20,12 @@ RESET='\e[m'
 case "$ENV" in
     uat)
         PROJECT=***REMOVED***
-        MONITOR_HOSTS=***REMOVED***,***REMOVED***
+        MONITOR_HOSTS=***REMOVED***,***REMOVED***,***REMOVED***,***REMOVED***
         KUBE_CLUSTER=gke_***REMOVED***_europe-west2-b_cluster-1
         ;;
     prod)
         PROJECT=***REMOVED***
-        MONITOR_HOSTS=***REMOVED***,***REMOVED***
+        MONITOR_HOSTS=***REMOVED***,***REMOVED***,***REMOVED***
         KUBE_CLUSTER=gke_***REMOVED***_europe-west2-b_cluster-1
         ;;
     *)
