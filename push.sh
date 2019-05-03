@@ -12,7 +12,7 @@ if [[ "$#" -ne 0 ]]; then
 fi
 
 echo "Pushing docker image..."
-# docker push "ovotech/cert-expiry-monitor"
-echo "(Not actually pushing Docker image because we haven't sorted out auth yet)"
+docker login -u "${DOCKER_HUB_USERNAME}" -p "${DOCKER_HUB_PASSWORD}"
+docker push "ovotech/cert-expiry-monitor"
 
 echo "Success!"
