@@ -3,7 +3,7 @@
 set -eu
 
 function usageExit () {
-    echo "Usage: build <version>"
+    echo "Usage: ./build.sh <version>"
     exit 1
 }
 
@@ -15,8 +15,5 @@ VERSION="$1"
 
 echo "Building docker image..."
 docker build . -t "ovotech/cert-expiry-monitor:$VERSION" -t "ovotech/cert-expiry-monitor:latest"
-
-echo "Pushing docker image..."
-docker push "ovotech/cert-expiry-monitor"
 
 echo "Success!"

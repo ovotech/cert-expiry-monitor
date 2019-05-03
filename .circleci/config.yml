@@ -1,0 +1,31 @@
+version: 2
+
+jobs:
+  build:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/python:2.7
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Setup Environment Variables
+          command: |
+            echo 'export CI_VERSION="$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH"' >> $BASH_ENV
+      - run:
+          name: Build Docker image
+          command: ./build.sh "${CI_VERSION}"
+      - run:
+          name: Publish docker image if master branch
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" -a "${CIRCLE_PROJECT_USERNAME}" == "ovotech" ]; then
+              ./push.sh
+            else
+              echo "Not publishing Docker image"
+            fi
+
+workflows:
+  version: 2
+  default:
+    jobs:
+      - build
