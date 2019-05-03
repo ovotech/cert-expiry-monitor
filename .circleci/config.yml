@@ -11,7 +11,11 @@ jobs:
       - run:
           name: Setup Environment Variables
           command: |
-            echo 'export CI_VERSION="$CIRCLE_BUILD_NUM-$CIRCLE_BRANCH"' >> $BASH_ENV
+            if [[ "${CIRCLE_BRANCH}" = "master" ]]; then
+              echo 'export CI_VERSION="${CIRCLE_BUILD_NUM}"' >> $BASH_ENV
+            else
+              echo 'export CI_VERSION="${CIRCLE_BRANCH}-${CIRCLE_BUILD_NUM}"' >> $BASH_ENV
+            fi
       - run:
           name: Build Docker image
           command: ./build.sh "${CI_VERSION}"
