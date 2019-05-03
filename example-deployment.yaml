@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: cert-expiry-monitor
-        image: ***REMOVED***/${PROJECT}/cert-expiry-monitor:${VERSION}
+        image: ovotech/cert-expiry-monitor:${VERSION}
         env:
         - name: MONITOR_HOSTS
           value: "${MONITOR_HOSTS}"
